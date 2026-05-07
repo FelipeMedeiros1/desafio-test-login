@@ -18,19 +18,22 @@ const usuarios = [
 export function realizarLogin(email, senha) {
     const usuarioEncontrado = usuarios.find(user => user.email === email);
     if (!usuarioEncontrado) {
-        return { 
-            sucesso: false, 
-            mensagem: "Usuário não encontrado" };
+        return {
+            sucesso: false,
+            mensagem: "Usuário não encontrado"
+        };
     }
     if (usuarioEncontrado.senha !== senha) {
         return { 
             sucesso: false, 
-            mensagem: "Email ou senha incorretos" };
+            mensagem: "Email ou senha incorretos" 
+        };
     }
     if (usuarioEncontrado.expirado) {
         return { 
             sucesso: false, 
-            mensagem: "Credenciais expiradas" };
+            mensagem: "Credenciais expiradas" 
+        };
     }
     return { 
         sucesso: true, 

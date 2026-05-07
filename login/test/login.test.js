@@ -6,39 +6,39 @@ import { describe, it } from 'mocha';
 describe('Testando Função de Login', function () {
 
     it('realizarLogin: deve retornar sucesso para credenciais corretas', function () {
-        const email = 'joao@example.com';
-        const senha = 'SenhaCorreta123';
+        const emailCorreto = 'joao@example.com';
+        const senhaCorreta = 'SenhaCorreta123';
 
-        const resultado = realizarLogin(email, senha);
+        const resultado = realizarLogin(emailCorreto, senhaCorreta);
 
         assert.strictEqual(resultado.sucesso, true);
         assert.strictEqual(resultado.mensagem, 'Login realizado com sucesso');
     });
 
     it('realizarLogin: deve retornar erro para credenciais incorretas', function () {
-        const email = 'joao@example.com';
-        const senha = 'SenhaIncorreta';
+        const emailCorreto = 'joao@example.com';
+        const senhaIncorreta = 'SenhaIncorreta';
 
-        const resultado = realizarLogin(email, senha);
+        const resultado = realizarLogin(emailCorreto, senhaIncorreta);
         
         assert.strictEqual(resultado.sucesso, false);
         assert.strictEqual(resultado.mensagem, 'Email ou senha incorretos');
     });
 
     it('realizarLogin: deve retornar erro para credenciais expiradas', function () {
-        const email = 'maria@example.com';
-        const senha = 'SenhaExpirada123';
+        const emailExpirado = 'maria@example.com';
+        const senhaExpirada = 'SenhaExpirada123';
 
-        const resultado = realizarLogin(email, senha);
+        const resultado = realizarLogin(emailExpirado, senhaExpirada);
 
         assert.strictEqual(resultado.sucesso, false);
         assert.strictEqual(resultado.mensagem, 'Credenciais expiradas');
     });
     it('realizarLogin: deve retornar erro para usuário não encontrado', function () {
-        const email = 'usuarioNaoEncontrado@example.com';
-        const senha = 'SenhaQualquer123';
+        const emailNaoEncontrado = 'usuarioNaoEncontrado@example.com';
+        const senhaQualquer = 'SenhaQualquer123';
 
-        const resultado = realizarLogin(email, senha);
+        const resultado = realizarLogin(emailNaoEncontrado, senhaQualquer);
 
         assert.strictEqual(resultado.sucesso, false);
         assert.strictEqual(resultado.mensagem, 'Usuário não encontrado');
@@ -60,26 +60,29 @@ describe('Testando Função de Cadastro de Usuário', function () {
 
     it('cadastrarUsuario: deve lançar erro ao tentar cadastrar com campos vazios', function () {
         const nome = 'test';
-        const email = '';
-        const senha = '';
+        const emailVazio = '';
+        const senhaVazia = '';
         assert.throws(
-            () => cadastrarUsuario(nome, email, senha),
+            () => cadastrarUsuario(nome, emailVazio, senhaVazia),
             { message: 'Todos os campos são obrigatórios' }
         );
     });
 
     it('cadastrarUsuario: deve lançar erro ao tentar cadastrar com email já existente', function () {
         const nome = 'João';
-        const email = 'joao@example.com';
-        const senha = 'SenhaCorreta123';
+        const emailExistente = 'joao@example.com';
+        const senhaExistente = 'SenhaCorreta123';
         assert.throws(
-            () => cadastrarUsuario(nome, email, senha),
+            () => cadastrarUsuario(nome, emailExistente, senhaExistente),
             { message: 'Email já cadastrado' }
         );
     });
 
     it('atualizarCredenciais: deve atualizar o status de expiração do usuário', function () {
-        const resultado = atualizarCredenciais(1, true);
+        const idUsuario = 1;
+        const novoStatusExpiracao = true;
+
+        const resultado = atualizarCredenciais(idUsuario, novoStatusExpiracao);
 
         assert.strictEqual(resultado.sucesso, true);
         assert.strictEqual(resultado.mensagem, 'Credenciais atualizadas com sucesso');
