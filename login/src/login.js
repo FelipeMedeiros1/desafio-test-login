@@ -63,12 +63,12 @@ export function cadastrarUsuario(nome, email, senha) {
     };
 }
 
-export function atualizarCredenciais(id, expirado) {
+export function atualizarCredenciais(id, status) {
     const usuario = usuarios.find(user => user.id === id);
     if (!usuario) {
         throw new Error("Usuário não encontrado");
     }
-    usuario.expirado = expirado;
+    usuario.expirado = status;
     return { 
         status: true, 
         mensagem: "Credenciais atualizadas com sucesso" 
