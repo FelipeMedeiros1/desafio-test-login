@@ -18,22 +18,25 @@ const usuarios = [
 export function realizarLogin(email, senha) {
     const usuarioEncontrado = usuarios.find(user => user.email === email);
     if (!usuarioEncontrado) {
-        return { 
-            sucesso: false, 
-            mensagem: "Usuário não encontrado" };
+        return {
+            status: false,
+            mensagem: "Usuário não encontrado"
+        };
     }
     if (usuarioEncontrado.senha !== senha) {
         return { 
-            sucesso: false, 
-            mensagem: "Email ou senha incorretos" };
+            status: false, 
+            mensagem: "Email ou senha incorretos" 
+        };
     }
     if (usuarioEncontrado.expirado) {
         return { 
-            sucesso: false, 
-            mensagem: "Credenciais expiradas" };
+            status: false, 
+            mensagem: "Credenciais expiradas" 
+        };
     }
     return { 
-        sucesso: true, 
+        status: true, 
         mensagem: "Login realizado com sucesso" 
     };
 }
@@ -55,7 +58,7 @@ export function cadastrarUsuario(nome, email, senha) {
     };
     usuarios.push(novoUsuario);
     return { 
-        sucesso: true, 
+        status: true, 
         mensagem: "Usuário cadastrado com sucesso" 
     };
 }
@@ -67,7 +70,7 @@ export function atualizarCredenciais(id, expirado) {
     }
     usuario.expirado = expirado;
     return { 
-        sucesso: true, 
+        status: true, 
         mensagem: "Credenciais atualizadas com sucesso" 
     };
 }
@@ -79,7 +82,7 @@ export function atualizarSenha(id, novaSenha) {
     }
     usuario.senha = novaSenha;
     return { 
-        sucesso: true, 
+        status: true, 
         mensagem: "Senha atualizada com sucesso" 
     };
 }
