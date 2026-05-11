@@ -86,3 +86,8 @@ export function atualizarSenha(id, novaSenha) {
         mensagem: "Senha atualizada com sucesso" 
     };
 }
+
+// listar todos os usuários retornar nome  email e status de expiração
+export function listarUsuarios() {
+    return usuarios.map(user => ({ id: user.id, nome: user.nome, email: user.email, expirado: user.expirado }));
+}
