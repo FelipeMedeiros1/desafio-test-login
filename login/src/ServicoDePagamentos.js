@@ -40,4 +40,10 @@ export class ServicoDePagamentos {
         return this.#pagamentos.map(p => ({ ...p }));
     }
 
+    limparPagamentos() {
+        this.#pagamentos = [];
+    }   
+
+ 
+
 }

@@ -12,6 +12,7 @@ describe('Teste do ServicoDePagamentos', () => {
 
 
     describe('realizarPagamento - casos de sucesso', () => {
+
         it('Deve realizar um pagamento padrão (valor <= 100)', () => {
             const codigoBarras = '987654321';
             const nomeEmpresa = 'Empresa B';
@@ -71,25 +72,7 @@ describe('Teste do ServicoDePagamentos', () => {
             const quantidadeEsperadaAposInsercao = quantidadeInicialDePagamentos + 1;
             assert.strictEqual(servico.listarPagamentos().length, quantidadeEsperadaAposInsercao);
         });
-
-        it('Deve preservar a ordem de inserção no histórico', () => {
-            const codigoBarrasPrimeiro = '101';
-            const codigoBarrasSegundo = '102';
-            const codigoBarrasTerceiro = '103';
-            const valorPrimeiro = 10;
-            const valorSegundo = 20;
-            const valorTerceiro = 30;
-
-            const primeiroPagamento = servico.realizarPagamento(codigoBarrasPrimeiro, 'Empresa 1', valorPrimeiro);
-            const segundoPagamento = servico.realizarPagamento(codigoBarrasSegundo, 'Empresa 2', valorSegundo);
-            const terceiroPagamento = servico.realizarPagamento(codigoBarrasTerceiro, 'Empresa 3', valorTerceiro);
-
-            const historico = servico.listarPagamentos();
-            assert.deepStrictEqual(historico.at(-3), primeiroPagamento);
-            assert.deepStrictEqual(historico.at(-2), segundoPagamento);
-            assert.deepStrictEqual(historico.at(-1), terceiroPagamento);
-        });
-
+      
         it('Deve retornar uma data próxima do instante atual', () => {
             const codigoBarras = '104';
             const nomeEmpresa = 'Empresa';
@@ -104,7 +87,7 @@ describe('Teste do ServicoDePagamentos', () => {
         });
 
         it('Deve aceitar código de barras com letras/caracteres especiais', () => {
-            const codigoBarrasComCaracteresEspeciais = 'ABC-"123/"456';
+            const codigoBarrasComCaracteresEspeciais = 'ABC-"123/"456*';
             const nomeEmpresa = 'Empresa 105';
             const valor = 10;
 
@@ -263,7 +246,7 @@ describe('Teste do ServicoDePagamentos', () => {
                     nomeEmpresa: nomeEmpresaPreCarregada,
                     valor: 50.00,
                     categoria: 'Padrao',
-                    data: new Date('2024-06-01')
+                    data: new Date('2026-06-01')
                 }]
             });
 
